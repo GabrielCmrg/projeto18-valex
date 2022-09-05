@@ -3,9 +3,7 @@ import dayjs from 'dayjs';
 import Cryptr from 'cryptr';
 import dotenv from 'dotenv';
 
-import * as companyRepository from '../repositories/companyRepository';
-import * as employeeRepository from '../repositories/employeeRepository';
-import * as cardRepository from '../repositories/cardRepository';
+import { companyRepository, employeeRepository, cardRepository } from '../repositories';
 
 import { makeCardName } from '../utils/transform';
 
