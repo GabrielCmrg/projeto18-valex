@@ -13,3 +13,13 @@ export function checkCreationRequest(req: Request, res: Response, next: NextFunc
   res.locals.newCardInfo = bodyValidation.value;
   return next();
 }
+
+export function checkActivationRequest(req: Request, res: Response, next: NextFunction) {
+  const validation = cardSchemas.activateCardSchema.validate(req.body);
+  if (validation.error) {
+    return res.status(422).send('There is something wrong with your request body.');
+  }
+
+  res.locals.activationInfo = validation.value;
+  return next();
+}
