@@ -58,10 +58,10 @@ async function searchExistingCard(
   }
 }
 
-function generateNewCard(
+async function generateNewCard(
   employee: employeeRepository.Employee,
   cardType: cardRepository.TransactionTypes
-): cardRepository.CardInsertData {
+) {
   const number: string = faker.finance.creditCardNumber();
   const cardholderName: string = makeCardName(employee.fullName);
   const expirationDate: string = dayjs().add(5, 'year').format('MM/YY');
@@ -77,6 +77,10 @@ function generateNewCard(
     isBlocked: false,
     type: cardType,
   };
+
+  await cardRepository.insert(newCard);
+
+  newCard.securityCode = CVC;
   return newCard;
 }
 
@@ -92,8 +96,6 @@ export async function createNewCard(
     company
   );
   await searchExistingCard(employeeId, cardType);
-  const newCard: cardRepository.CardInsertData = generateNewCard(employee, cardType);
-
-  await cardRepository.insert(newCard);
+  const newCard: cardRepository.CardInsertData = await generateNewCard(employee, cardType);
   return newCard;
 }
