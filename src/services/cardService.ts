@@ -84,6 +84,15 @@ async function generateNewCard(
   return newCard;
 }
 
+async function searchCard(cardId: number) {
+  const card: cardRepository.Card = await cardRepository.findById(cardId);
+  if (!card) {
+    throw { type: 'noCard', message: 'There is no card with this ID.' }
+  }
+
+  return card;
+}
+
 // Global functions
 export async function createNewCard(
   APIKey: string,
