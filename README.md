@@ -28,5 +28,13 @@ This route returns:
 
 ```js
 {
+  number, // string with the card number
+  cardholderName, // string with the card owner name
+  expirationDate, // string with date formatted MM/YY
+  securityCode, // string with CVV encrypted
+  employeeId, // number integer
+  isVirtual, // boolean
+  isBlocked, // boolean
+  type, // 'groceries', 'restaurants', 'transport', 'education' or 'health'
 }
 ```
