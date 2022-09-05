@@ -5,7 +5,7 @@ export const newCardSchema = Joi.object({
     .string()
     .trim()
     .required()
-    .allow(['groceries', 'restaurants', 'transport', 'education', 'health']),
+    .allow('groceries', 'restaurants', 'transport', 'education', 'health'),
   employeeId: Joi.number().integer().greater(0),
 });
 
