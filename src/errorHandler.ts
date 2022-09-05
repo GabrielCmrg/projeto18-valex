@@ -8,5 +8,11 @@ export default function errorHandler(
   next: NextFunction
 ) {
   console.error(error);
+  if (error.type === 'employeeFromAnotherCompany' || error.type === 'duplicateCard') {
+    return res.status(403).send(error.message);
+  }
+  if (error.type === 'noCompany' || error.type === 'noEmployee') {
+    return res.status(404).send(error.message);
+  }
   return res.status(500).send('Something broke internally');
 }
