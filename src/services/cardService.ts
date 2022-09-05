@@ -93,6 +93,13 @@ async function searchCard(cardId: number) {
   return card;
 }
 
+function checkValidity(expirationDate: string) {
+  const isExpired = dayjs(expirationDate, 'MM/YY').isBefore(dayjs());
+  if (isExpired) {
+    throw { type: 'expiredDate', message: 'The card is expired and cannot be activated.' };
+  }
+}
+
 // Global functions
 export async function createNewCard(
   APIKey: string,

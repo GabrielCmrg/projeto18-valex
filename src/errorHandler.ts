@@ -14,5 +14,8 @@ export default function errorHandler(
   if (error.type === 'noCompany' || error.type === 'noEmployee' || error.type === 'noCard') {
     return res.status(404).send(error.message);
   }
+  if (error.type === 'expiredDate') {
+    return res.status(409).send(error.message);
+  }
   return res.status(500).send('Something broke internally');
 }
